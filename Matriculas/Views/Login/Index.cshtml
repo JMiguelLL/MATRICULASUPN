@@ -1,0 +1,53 @@
+﻿@model CapaModelos.Usuario
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel" style="box-shadow: 5px 5px 5px 5px lightgrey; padding: 15px 15px 15px 15px">
+
+    <div class="panel-title">
+        EL LOGIN
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div>
+                    <label class="">Email</label>
+                    <div>
+                        @Html.EditorFor(model => model.email)
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div>
+                    <label class="">Contraseña</label>
+                    <div>
+                        @Html.EditorFor(model => model.password)
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert-danger">
+                        @ViewBag.Message
+                    </div>
+                }
+                <div>
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Login" class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+
+       
+
+</div>
+
+

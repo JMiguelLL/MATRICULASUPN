@@ -1,0 +1,73 @@
+﻿@using CapaModelos;
+@model IEnumerable<CapaModelos.Clase>
+@{
+    Estudiante estudiante = @ViewData["estudiante"] as Estudiante;
+    Matricula matricula = @ViewData["matricula"] as Matricula;
+}
+
+@{
+    ViewBag.Title = "EditarMatricula";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel" style="box-shadow: 5px 5px 5px 5px lightgrey; padding: 15px 15px 15px 15px">
+    <div class="panel-title">
+        <h3>Cursos matrículados</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div>
+                <h4>Datos del Estudiante</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>NOMBRE: @estudiante.nombre</label>
+                </div>
+                <div class="col-md-2">
+                    <label>APELLIDOS: @estudiante.apellidoPaterno @estudiante.apellidoPaterno</label>
+                </div>
+                <div class="col-md-2">
+                    <label>CODIGO: @estudiante.codigo</label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top:20px">
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>CURSO</th>
+                        <th>NÚMERO DE CREDITOS</th>
+                        <th>CÓDIGO DE CLASE</th>
+                        <th>AULA</th>
+                        <th>OPCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var clase in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(e => clase.curso.nombre)</td>
+                            <td>@Html.DisplayFor(e => clase.curso.creditos)</td>
+                            <td>@Html.DisplayFor(e => clase.codigo)</td>
+                            <td>@Html.DisplayFor(e => clase.aula.codigo)</td>
+                           
+                            <td>
+                                <span>
+                                        <button class="btn btn-danger" onclick="location.href = '@Url.Action("EliminarCurso","Matricula",new {idEstudiante = estudiante.idEstudiante,idMatricula = matricula.idMatricula, idClase = clase.idClase},null)'"><i class="glyphicon glyphicon-remove"></i> Eliminar Curso</button>
+                                  
+                                </span>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+

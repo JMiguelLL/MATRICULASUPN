@@ -1,0 +1,28 @@
+﻿@model CapaModelos.Estudiante
+
+@{
+    ViewBag.Title = "MatriculaPeriodo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@using (Html.BeginForm())
+{
+<div class="panel" style="box-shadow: 5px 5px 5px 5px lightgrey; padding: 15px 15px 15px 15px">
+
+    <div class="panel-title">
+        MATRÍCULA - PERIODO
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Periodo de matrícula</label>
+            @Html.DropDownList("periodoElegido", (SelectList)ViewBag.listaPeriodos, "Seleccione un periodo", new { @class = "form-control" })
+        </div>
+        <div class="col-md-2" style="flex-direction: column; justify-content:center">
+
+            <input type="submit" value="Buscar" class="btn btn-primary">
+        </div>
+    </div>
+
+</div>
+}

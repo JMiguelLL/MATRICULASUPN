@@ -1,0 +1,54 @@
+﻿@model IList<CapaModelos.Reporte>
+
+@{
+    ViewBag.Title = "Reporte";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="panel" style="box-shadow: 5px 5px 5px 5px lightgrey; padding: 15px 15px 15px 15px">
+    <div class="panel-title">
+        <h3>Reporte de matrículas</h3>
+        <a target="_blank" href='@Url.Action("ExportarPDF","Reporte")'>
+            <button class="btn btn-success"><i class="glyphicon glyphicon-arrow-down"></i> Descargar Reporte</button>
+        </a>
+        
+    </div>
+    <div class="panel-body">
+
+        <div class="row" style="padding-top:20px">
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>CÓDIGO DE ESTUDIANTE</th>
+                        <th>APELLIDOS DE ESTUDIANTE</th>
+                        <th>NOMBRES DE ESTUDIANTE</th>
+                        <th>PERIODO</th>
+                        <th>CURSOS MATRICULADOS</th>
+                        <th>ACCIONES DE AÑADIR</th>
+                        <th>ACCIONES DE ELIMINAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reporte in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(e => reporte.codigo)</td>
+                            <td>@Html.DisplayFor(e => reporte.apellidoPaterno) @Html.DisplayFor(e => reporte.apellidoMaterno)</td>
+                            <td>@Html.DisplayFor(e => reporte.nombre)</td>
+                            <td>@Html.DisplayFor(e => reporte.nombrePeriodo)</td>
+                            <td>@Html.DisplayFor(e => reporte.cursosMatriculados)</td>
+                            <td>@Html.DisplayFor(e => reporte.cantidadAgregados)</td>
+                            <td>@Html.DisplayFor(e => reporte.cantidadEliminados)</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+

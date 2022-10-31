@@ -1,0 +1,73 @@
+﻿@model IList<CapaModelos.Estudiante>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="panel" style="box-shadow: 5px 5px 5px 5px lightgrey; padding: 15px 15px 15px 15px">
+    <div class="panel-title">
+        <h2>Lista de estudiantes</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO PATERNO</th>
+                    <th>APELLIDO MATERNO</th>
+                    <th>CARRERA</th>
+                    <th>ESTADO</th>
+                    <th>OPCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var estudiante in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(e => estudiante.nombre)</td>
+                        <td>@Html.DisplayFor(e => estudiante.apellidoPaterno)</td>
+                        <td>@Html.DisplayFor(e => estudiante.apellidoMaterno)</td>
+                        <td>@Html.DisplayFor(e => estudiante.carrera.nombre)</td>
+                        @switch (estudiante.status)
+                        {
+                            case 1:
+                                <td>Habilitado</td>
+                                break;
+                            case 2:
+                                <td>Deshabilitado</td>
+                                break;
+                            default:
+                                <td>Deshabilitado</td>
+                                break;
+                        }
+                        <td>
+                            <span>
+                                @if (estudiante.status == 1)
+                                {
+                                    <button class="btn btn-success" onclick="location.href = '@Url.Action("Periodo","Matricula",new {idEstudiante = estudiante.idEstudiante},null)'"><i class="glyphicon glyphicon-plus"></i> Matricular</button>
+
+                                    <button class="btn btn-info" onclick="location.href = '@Url.Action("EditarMatricula","Matricula",new {idEstudiante = estudiante.idEstudiante},null)'"><i class="glyphicon glyphicon-pencil"></i> Editar Matrícula</button>
+
+                                    <button class="btn btn-success" onclick="location.href = '@Url.Action("CursosMatriculados","Estudiantes",new {idEstudiante = estudiante.idEstudiante},null)'"><i class="glyphicon glyphicon-list"></i> Detalle Matrícula</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-success" onclick="location.href = '@Url.Action("NoPermitido","Matricula")'"><i class="glyphicon glyphicon-plus"></i> Matricular</button>
+                                }
+
+                            </span>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+

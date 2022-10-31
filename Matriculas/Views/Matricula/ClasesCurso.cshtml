@@ -1,0 +1,97 @@
+﻿@using CapaModelos;
+@model IEnumerable<CapaModelos.Clase>
+
+@{
+    Estudiante estudiante = @ViewData["estudiante"] as Estudiante;
+    Periodo periodo = @ViewData["periodo"] as Periodo;
+    Curso curso = @ViewData["curso"] as Curso;
+}
+
+@{
+    ViewBag.Title = "ClasesCurso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel" style="box-shadow: 5px 5px 5px 5px lightgrey; padding: 15px 15px 15px 15px">
+    <div class="panel-title" style="">
+        <h3>Cursos disponibles para el periodo @periodo.nombre</h3>
+        <a href='@Url.Action("CursosPeriodo", "Matricula", new { idEstudiante = estudiante.idEstudiante, idPeriodo = periodo.idPeriodo })'>
+            <button class="btn btn-info"><i class="glyphicon glyphicon-arrow-left"></i> Regresar</button>
+        </a>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div>
+                <h4>Datos del Estudiante</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>NOMBRE: @estudiante.nombre</label>
+                </div>
+                <div class="col-md-2">
+                    <label>APELLIDOS: @estudiante.apellidoPaterno @estudiante.apellidoPaterno</label>
+                </div>
+                <div class="col-md-2">
+                    <label>CODIGO: @estudiante.codigo</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <h4>Curso Elegido</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>NOMBRE: @curso.nombre</label>
+                </div>
+                <div class="col-md-2">
+                    <label>CREDITOS: @curso.creditos</label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top:20px">
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>CLASE</th>
+                        <th>CÓDIGO</th>
+                        <th>HORA DE INICIO</th>
+                        <th>HORA DE FIN</th>
+                        <th>AULA</th>
+                        <th>OPCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var clase in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(e => clase.nombre)</td>
+                            <td>@Html.DisplayFor(e => clase.codigo)</td>
+                            <td>@Html.DisplayFor(e => clase.horaInicio)</td>
+                            <td>@Html.DisplayFor(e => clase.horaFin)</td>
+                            <td>@Html.DisplayFor(e => clase.aula.codigo)</td>
+                            <td>
+                                <span>
+                                    @if (clase.status == 1)
+                                    {
+                                        <button class="btn btn-success" onclick="location.href = '@Url.Action("RegistrarEstudianteClase","Matricula",new {idEstudiante = estudiante.idEstudiante, idPeriodo = periodo.idPeriodo, idCurso = curso.idCurso,  idClase = clase.idClase},null)'"><i class="glyphicon glyphicon-plus"></i> Elegir Clase</button>
+                                    }
+                                    else
+                                    {
+                                        <i class="glyphicon glyphicon-remove-sign" style="color:red"></i>
+                                    }
+
+                                </span>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+

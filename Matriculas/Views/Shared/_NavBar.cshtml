@@ -1,0 +1,19 @@
+﻿
+<nav class="navbar navbar-fixed-top" style="background-color: rgb(253,186,48) ">
+    <a class="navbar-brand">UNIVERSIDAD PRIVADA DEL NORTE</a>
+
+  
+    <div class="navbar-collapse collapse" style="justify-content:flex-end">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        </ul>
+       
+        <form class="form-inline my-2 my-lg-0" >
+        @if (Session["email"] != null)
+        {
+            <label><i class="glyphicon glyphicon-user" ></i>@Session["email"]</label>
+           
+        }
+
+        </form>
+    </div>
+</nav>
